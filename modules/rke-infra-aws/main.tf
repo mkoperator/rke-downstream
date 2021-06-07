@@ -27,7 +27,7 @@ resource "aws_instance" "node_master" {
     }
   }
   tags = {
-    Name                                     = "${var.prefix}-node-worker-${count.index}"
+    Name                                     = "${var.prefix}-node-master-${count.index}"
     K8sRoles                                 = "controlplane,etcd"
     TFModule                                 = var.prefix
     "kubernetes.io/cluster/${var.clusterid}" = "owned"
@@ -93,7 +93,7 @@ resource "aws_instance" "node_all" {
     }
   }
   tags = {
-    Name                                     = "${var.prefix}-node-worker-${count.index}"
+    Name                                     = "${var.prefix}-node-aio-${count.index}"
     K8sRoles                                 = "controlplane,etcd,worker"
     TFModule                                 = var.prefix
     "kubernetes.io/cluster/${var.clusterid}" = "owned"

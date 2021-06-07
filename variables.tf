@@ -41,3 +41,13 @@ variable aws_region {
 variable iam_instance_profile {
   default = "rancher-node"
 }
+variable "rancher_server_url" {
+  type        = string
+  description = "url of rancher management plane."
+  default     = ""
+}
+variable "rancher_token" {
+  type        = string
+  description = "token to deploy to rancher."
+  default     = ""
+}
