@@ -22,3 +22,6 @@ terraform-provider-rke*
 cluster.yml
 kube_config_cluster.yml
 
+# Id Files
+id_rsa
+id_rsa.pub
