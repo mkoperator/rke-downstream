@@ -1,13 +1,4 @@
-# rke-awslab
-
-This is based on Rahul's work [here](https://github.com/rawmind0/tf-module-rancher-infra-aws).  It's been customised to generate a `cluster.yml` for use by RKE, based on the infrastructure that's been created.  The nodes will be appropriately tagged so that the in-tree Cloud Provider works, meaning it's possible to create a Service of type LoadBalancer and have AWS create one on Kubernetes' behalf.
-
-## Pre-requisites
-
-* Terraform 0.13
-* AWS CLI, logged in with your access credentials.
-* RKE CLI
-
+## Game Server Downstream Cluster
 ### Initialise dependencies
 
 ```shell
@@ -43,18 +34,6 @@ module.rke_infra.aws_lb_target_group.rancher_lb_tg_80[0]: Creating...
 [..]
 
 Apply complete! Resources: 18 added, 0 changed, 0 destroyed.
-```
-
-A `cluster.yml` will be generated based on the types of nodes you've configured.  At this point you can edit the cluster configuration or just run `rke up` to boostrap your cluster:
-
-```shell
-$ rke up
-INFO[0000] Running RKE version: v1.2.3
-INFO[0000] Initiating Kubernetes cluster
-
-[..]
-
-INFO[0185] Finished building Kubernetes cluster successfully
 ```
 
 ### Deploying an NLB for Ingress

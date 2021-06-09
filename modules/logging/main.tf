@@ -11,7 +11,7 @@ resource "helm_release" "logging_crd" {
   repository = "https://charts.rancher.io"
   chart      = "rancher-logging-crd"
   namespace  = "cattle-logging-system"
-  version    = "3.8.203"
+  version    = "3.9.400"
   depends_on = [kubernetes_namespace.cattle_logging_system]
 }
 resource "helm_release" "logging" {
@@ -19,6 +19,6 @@ resource "helm_release" "logging" {
   name       = "rancher-logging"
   repository = "https://charts.rancher.io"
   chart      = "rancher-logging"
-  version    = "3.8.203"
+  version    = "3.9.400"
   depends_on = [helm_release.logging_crd]
 }
