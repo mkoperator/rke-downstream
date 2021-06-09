@@ -2,10 +2,6 @@ variable cluster_name {
   default = "rke"
 }
 
-variable clusterid {
-  default = ""
-}
-
 variable kubernetes_version {
   default = "v1.19.2-rancher1-1"
 }
@@ -50,4 +46,15 @@ variable "rancher_token" {
   type        = string
   description = "token to deploy to rancher."
   default     = ""
+}
+variable "ssh_key_file" {
+  type        = string
+  description = "File path and name of SSH private key used for infrastructure"
+  default     = "id_rsa"
+}
+
+variable "ssh_pub_file" {
+  type        = string
+  description = "File path and name of SSH public key used for infrastructure"
+  default     = "id_rsa.pub"
 }

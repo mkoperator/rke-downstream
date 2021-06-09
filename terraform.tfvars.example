@@ -7,3 +7,6 @@ aws_region           = "eu-west-2"
 node_all_count       = 0
 node_master_count    = 1
 node_worker_count    = 3
+rancher_token        = ""
+rancher_server_url   = ""
+iam_instance_profile = ""

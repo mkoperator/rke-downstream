@@ -80,13 +80,13 @@ variable "docker_version" {
 variable "ssh_key_file" {
   type        = string
   description = "File path and name of SSH private key used for infrastructure"
-  default     = "~/.ssh/id_rsa"
+  default     = "id_rsa"
 }
 
 variable "ssh_pub_file" {
   type        = string
   description = "File path and name of SSH public key used for infrastructure"
-  default     = ""
+  default     = "id_rsa.pub"
 }
 
 variable "register_command" {

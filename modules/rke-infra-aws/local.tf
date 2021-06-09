@@ -1,5 +1,4 @@
 locals {
-  ssh_pub_file          = var.ssh_pub_file != "" ? var.ssh_pub_file : "${var.ssh_key_file}.pub"
   user_data             = var.user_data != "" ? var.user_data : <<-EOT
     #!/bin/bash -x
 
@@ -8,15 +7,15 @@ locals {
   EOT
   node_all_cloudinit    = <<-EOT
     ${local.user_data}
-    %{if var.register_command != ""}"${var.register_command} --etcd --controlplane --worker"%{endif}
+    ${var.register_command} --etcd --controlplane --worker
   EOT
   node_master_cloudinit = <<-EOT
     ${local.user_data}
-    %{if var.register_command != ""}"${var.register_command} --etcd --controlplane"%{endif}
+    ${var.register_command} --etcd --controlplane
   EOT
   node_worker_cloudinit = <<-EOT
     ${local.user_data}
-    %{if var.register_command != ""}"${var.register_command} --worker"%{endif}
+    ${var.register_command} --worker
   EOT
   tags = {
     TFModule = var.prefix

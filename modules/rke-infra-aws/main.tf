@@ -5,7 +5,7 @@ resource "aws_instance" "node_master" {
   count                       = var.node_master_count
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.instance_type
-  key_name                    = aws_key_pair.rancher_key_pair.key_name
+  key_name                    = aws_key_pair.downstream_key_pair.key_name
   iam_instance_profile        = var.iam_instance_profile
   vpc_security_group_ids      = [aws_security_group.rancher_nodes.id]
   subnet_id                   = element(tolist(data.aws_subnet_ids.available.ids), 0)
@@ -24,6 +24,7 @@ resource "aws_instance" "node_master" {
       type = "ssh"
       host = self.public_ip
       user = var.node_username
+      private_key = tls_private_key.global_key.private_key_pem
     }
   }
   tags = {
@@ -38,7 +39,7 @@ resource "aws_instance" "node_worker" {
   count                       = var.node_worker_count
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.instance_type
-  key_name                    = aws_key_pair.rancher_key_pair.key_name
+  key_name                    = aws_key_pair.downstream_key_pair.key_name
   vpc_security_group_ids      = [aws_security_group.rancher_nodes.id]
   subnet_id                   = element(tolist(data.aws_subnet_ids.available.ids), 0)
   associate_public_ip_address = true
@@ -57,6 +58,7 @@ resource "aws_instance" "node_worker" {
       type = "ssh"
       host = self.public_ip
       user = var.node_username
+      private_key = tls_private_key.global_key.private_key_pem
     }
   }
   tags = {
@@ -71,7 +73,7 @@ resource "aws_instance" "node_all" {
   count                       = var.node_all_count
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.instance_type
-  key_name                    = aws_key_pair.rancher_key_pair.key_name
+  key_name                    = aws_key_pair.downstream_key_pair.key_name
   vpc_security_group_ids      = [aws_security_group.rancher_nodes.id]
   subnet_id                   = element(tolist(data.aws_subnet_ids.available.ids), 0)
   associate_public_ip_address = true
@@ -90,6 +92,7 @@ resource "aws_instance" "node_all" {
       type = "ssh"
       host = self.public_ip
       user = var.node_username
+      private_key = tls_private_key.global_key.private_key_pem
     }
   }
   tags = {
