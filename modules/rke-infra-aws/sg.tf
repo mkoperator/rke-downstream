@@ -8,6 +8,7 @@ resource "aws_security_group" "rancher_nodes" {
     to_port     = 22
     protocol    = "TCP"
     cidr_blocks = ["0.0.0.0/0"]
+    description = ""
   }
 
   ingress {
@@ -15,6 +16,7 @@ resource "aws_security_group" "rancher_nodes" {
     to_port         = 80
     protocol        = "TCP"
     cidr_blocks = ["0.0.0.0/0"]
+    description = ""
   }
 
   ingress {
@@ -22,6 +24,7 @@ resource "aws_security_group" "rancher_nodes" {
     to_port         = 443
     protocol        = "TCP"
     cidr_blocks = ["0.0.0.0/0"]
+    description = ""
   }
 
   ingress {
@@ -29,6 +32,7 @@ resource "aws_security_group" "rancher_nodes" {
     to_port     = 6443
     protocol    = "TCP"
     cidr_blocks = ["0.0.0.0/0"]
+    description = ""
   }
 
   ingress {
@@ -36,6 +40,7 @@ resource "aws_security_group" "rancher_nodes" {
     to_port   = 0
     protocol  = "-1"
     self      = true
+    description = ""
   }
 
   egress {
@@ -43,6 +48,7 @@ resource "aws_security_group" "rancher_nodes" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+    description = ""
   }
   tags = local.tags
 }

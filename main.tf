@@ -47,3 +47,15 @@ module "monitoring" {
   kubeconfig_file = local_file.kube_config_workload_yaml.filename
   project_system_id = rancher2_cluster_sync.downstream_cluster.system_project_id
 }
+
+module "logging" {
+  source = "./modules/logging"
+  kubeconfig_file = local_file.kube_config_workload_yaml.filename
+  project_system_id = rancher2_cluster_sync.downstream_cluster.system_project_id
+}
+
+module "agones" {
+  source = "./modules/agones"
+  kubeconfig_file = local_file.kube_config_workload_yaml.filename
+  project_id = rancher2_cluster_sync.downstream_cluster.default_project_id
+}

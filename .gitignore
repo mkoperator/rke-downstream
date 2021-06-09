@@ -21,6 +21,7 @@ terraform-provider-rke*
 # Generated RKE and kubeconfig
 cluster.yml
 kube_config_cluster.yml
+kube_config_workload.yaml
 
 # Id Files
 id_rsa

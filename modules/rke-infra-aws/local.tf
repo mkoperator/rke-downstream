@@ -15,11 +15,11 @@ locals {
   EOT
   node_svc_worker_cloudinit = <<-EOT
     ${local.user_data}
-    ${var.register_command} --worker --taints service=true:NoSchedule --label type=service
+    ${var.register_command} --worker --label type=service
   EOT
   node_game_worker_cloudinit = <<-EOT
     ${local.user_data}
-    ${var.register_command} --worker --label type=game
+    ${var.register_command} --worker --label agones.dev/agones-system=true --taints agones.dev/agones-system=true:NoExecute
   EOT
   tags = {
     TFModule = var.prefix
