@@ -53,10 +53,10 @@ resource "aws_lb_target_group_attachment" "rancher_lb_tg_attach_80_all" {
 
 # Create lb target group attachment on port 80 for node_worker instances
 resource "aws_lb_target_group_attachment" "rancher_lb_tg_attach_80_worker" {
-  count = var.deploy_lb ? var.node_worker_count : 0
+  count = var.deploy_lb ? var.node_svc_worker_count : 0
 
   target_group_arn = aws_lb_target_group.rancher_lb_tg_80[0].arn
-  target_id        = aws_instance.node_worker[count.index].id
+  target_id        = aws_instance.node_svc_worker[count.index].id
   port             = aws_lb_target_group.rancher_lb_tg_80[0].port
 }
 
@@ -71,10 +71,10 @@ resource "aws_lb_target_group_attachment" "rancher_lb_tg_attach_443_all" {
 
 # Create lb target group attachment on port 443 for node_worker instances
 resource "aws_lb_target_group_attachment" "rancher_lb_tg_attach_443_worker" {
-  count = var.deploy_lb ? var.node_worker_count : 0
+  count = var.deploy_lb ? var.node_svc_worker_count : 0
 
   target_group_arn = aws_lb_target_group.rancher_lb_tg_443[0].arn
-  target_id        = aws_instance.node_worker[count.index].id
+  target_id        = aws_instance.node_svc_worker[count.index].id
   port             = aws_lb_target_group.rancher_lb_tg_443[0].port
 }
 

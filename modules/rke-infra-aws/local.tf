@@ -13,9 +13,13 @@ locals {
     ${local.user_data}
     ${var.register_command} --etcd --controlplane
   EOT
-  node_worker_cloudinit = <<-EOT
+  node_svc_worker_cloudinit = <<-EOT
     ${local.user_data}
-    ${var.register_command} --worker
+    ${var.register_command} --worker --taints service=true:NoSchedule --label type=service
+  EOT
+  node_game_worker_cloudinit = <<-EOT
+    ${local.user_data}
+    ${var.register_command} --worker --label type=game
   EOT
   tags = {
     TFModule = var.prefix

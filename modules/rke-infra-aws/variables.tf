@@ -47,10 +47,11 @@ variable "node_master_count" {
   default     = 0
 }
 
-variable "node_worker_count" {
-  type        = number
-  description = "Worker nodes count"
-  default     = 0
+variable node_svc_worker_count {
+  default = 0
+}
+variable node_game_worker_count {
+  default = 0
 }
 
 variable "node_all_count" {
@@ -101,10 +102,11 @@ variable "user_data" {
   default     = ""
 }
 
-variable "iam_instance_profile" {
-  type        = string
-  description = "IAM instance profile name to associate with instance"
-  default     = ""
+variable master_iam_instance_profile {
+  default = "rancher-node"
+}
+variable worker_iam_instance_profile {
+  default = "rancher-node"
 }
 
 variable "clusterid" {

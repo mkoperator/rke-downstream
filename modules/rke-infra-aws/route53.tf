@@ -10,5 +10,5 @@ resource "aws_route53_record" "rancher" {
   name    = "${var.route53_name}.${data.aws_route53_zone.dns_zone[count.index].name}"
   ttl     = "300"
   type    = var.deploy_lb ? "CNAME" : "A"
-  records = var.deploy_lb ? [aws_lb.rancher_lb[count.index].dns_name] : flatten([[aws_instance.node_all[*].public_ip], [aws_instance.node_worker[*].public_ip]])
+  records = var.deploy_lb ? [aws_lb.rancher_lb[count.index].dns_name] : flatten([[aws_instance.node_all[*].public_ip], [aws_instance.node_svc_worker[*].public_ip]])
 }

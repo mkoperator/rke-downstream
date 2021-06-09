@@ -26,15 +26,20 @@ variable node_master_count {
   default = 0
 }
 
-variable node_worker_count {
+variable node_svc_worker_count {
   default = 0
 }
-
+variable node_game_worker_count {
+  default = 0
+}
 variable aws_region {
   default = "us-east-1"
 }
 
-variable iam_instance_profile {
+variable master_iam_instance_profile {
+  default = "rancher-node"
+}
+variable worker_iam_instance_profile {
   default = "rancher-node"
 }
 variable "rancher_server_url" {
