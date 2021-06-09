@@ -41,3 +41,9 @@ module "rke_infra" {
 
   deploy_lb = true 
 }
+
+module "monitoring" {
+  source = "./modules/monitoring"
+  kubeconfig_file = local_file.kube_config_workload_yaml.filename
+  project_system_id = rancher2_cluster_sync.downstream_cluster.system_project_id
+}
