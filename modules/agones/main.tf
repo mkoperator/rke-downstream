@@ -14,4 +14,7 @@ resource "helm_release" "agones" {
   depends_on = [kubernetes_namespace.agones_system]
   timeout    = 600
   reuse_values = true
+  values     = [
+    "${file(var.values_yaml)}"
+  ]
 }

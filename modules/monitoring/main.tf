@@ -29,4 +29,7 @@ resource "helm_release" "monitoring" {
   chart      = "rancher-monitoring"
   version    = "9.4.203"
   depends_on = [helm_release.monitoring_crd]
+  values     = [
+    "${file(var.values_yaml)}"
+  ]
 }
