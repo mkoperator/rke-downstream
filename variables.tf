@@ -39,7 +39,10 @@ variable aws_region {
 variable master_iam_instance_profile {
   default = "rancher-node"
 }
-variable worker_iam_instance_profile {
+variable svc_iam_instance_profile {
+  default = "rancher-node"
+}
+variable game_iam_instance_profile {
   default = "rancher-node"
 }
 variable "rancher_server_url" {
@@ -62,4 +65,9 @@ variable "ssh_pub_file" {
   type        = string
   description = "File path and name of SSH public key used for infrastructure"
   default     = "id_rsa.pub"
+}
+variable "aws_vpc" {
+  type        = string
+  description = "vpc id"
+  default     = ""
 }

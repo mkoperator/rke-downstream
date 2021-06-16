@@ -17,7 +17,7 @@ data "aws_ami" "ubuntu" {
 }
 
 data "aws_vpc" "default" {
-  default = true
+  id = var.aws_vpc
 }
 
 data "aws_subnet_ids" "available" {

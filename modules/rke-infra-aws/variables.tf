@@ -105,7 +105,10 @@ variable "user_data" {
 variable master_iam_instance_profile {
   default = "rancher-node"
 }
-variable worker_iam_instance_profile {
+variable svc_iam_instance_profile {
+  default = "rancher-node"
+}
+variable game_iam_instance_profile {
   default = "rancher-node"
 }
 
@@ -113,4 +116,9 @@ variable "clusterid" {
   type        = string
   description = "Unique ID for this cluster"
   default     = "1d776bf9-8283-4ea8-af3a-f8d30646695e"
+}
+variable "aws_vpc" {
+  type        = string
+  description = "vpc id"
+  default     = ""
 }

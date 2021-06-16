@@ -28,8 +28,10 @@ module "rke_infra" {
   aws_secret_key       = var.aws_secret_key
   aws_region           = var.aws_region
   prefix               = var.aws_prefix
+  aws_vpc              = var.aws_vpc
   master_iam_instance_profile = var.master_iam_instance_profile
-  worker_iam_instance_profile = var.worker_iam_instance_profile
+  game_iam_instance_profile = var.game_iam_instance_profile
+  svc_iam_instance_profile = var.svc_iam_instance_profile
   clusterid            = rancher2_cluster.downstream_cluster.id
   register_command     = rancher2_cluster.downstream_cluster.cluster_registration_token.0.node_command
   node_master_count = var.node_master_count
