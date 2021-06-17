@@ -7,7 +7,7 @@ resource "aws_instance" "node_master" {
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.downstream_key_pair.key_name
   iam_instance_profile        = var.master_iam_instance_profile
-  vpc_security_group_ids      = [aws_security_group.rancher_nodes.id]
+  vpc_security_group_ids      = [aws_security_group.master_nodes.id]
   subnet_id                   = element(tolist(data.aws_subnet_ids.available.ids), 0)
   associate_public_ip_address = true
   user_data                   = local.node_master_cloudinit
@@ -42,7 +42,7 @@ resource "aws_instance" "node_svc_worker" {
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.downstream_key_pair.key_name
-  vpc_security_group_ids      = [aws_security_group.rancher_nodes.id]
+  vpc_security_group_ids      = [aws_security_group.svc_nodes.id]
   subnet_id                   = element(tolist(data.aws_subnet_ids.available.ids), 0)
   associate_public_ip_address = true
   user_data                   = local.node_svc_worker_cloudinit
@@ -79,7 +79,7 @@ resource "aws_instance" "node_game_worker" {
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.downstream_key_pair.key_name
-  vpc_security_group_ids      = [aws_security_group.rancher_nodes.id]
+  vpc_security_group_ids      = [aws_security_group.game_nodes.id]
   subnet_id                   = element(tolist(data.aws_subnet_ids.available.ids), 0)
   associate_public_ip_address = true
   user_data                   = local.node_game_worker_cloudinit
@@ -116,7 +116,7 @@ resource "aws_instance" "node_all" {
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.downstream_key_pair.key_name
-  vpc_security_group_ids      = [aws_security_group.rancher_nodes.id]
+  vpc_security_group_ids      = [aws_security_group.master_nodes.id, aws_security_group.svc_nodes.id, aws_security_group.game_nodes.id]
   subnet_id                   = element(tolist(data.aws_subnet_ids.available.ids), 0)
   associate_public_ip_address = true
   user_data                   = local.node_all_cloudinit
