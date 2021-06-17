@@ -66,8 +66,3 @@ variable "ssh_pub_file" {
   description = "File path and name of SSH public key used for infrastructure"
   default     = "id_rsa.pub"
 }
-variable "aws_vpc" {
-  type        = string
-  description = "vpc id"
-  default     = ""
-}
