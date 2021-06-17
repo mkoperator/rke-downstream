@@ -61,3 +61,9 @@ module "agones" {
   project_id         = rancher2_cluster_sync.downstream_cluster.default_project_id
   values_yaml       = "agones_values.yaml"
 }
+
+module "autoscaler" {
+  source            = "./modules/cluster-autoscaler"
+  kubeconfig_file   = local_file.kube_config_workload_yaml.filename
+  project_system_id = rancher2_cluster_sync.downstream_cluster.system_project_id
+}

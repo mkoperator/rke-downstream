@@ -19,7 +19,7 @@ resource "helm_release" "agones" {
   ]
 }
 
-resource "kubectl_manifest" "gameserver" {
-    yaml_body = file("gameserver.yaml")
-    depends_on = [helm_release.agones]
-}
+#resource "kubectl_manifest" "gameserver" {
+#    yaml_body = file("gameserver.yaml")
+#    depends_on = [helm_release.agones]
+#}

@@ -3,7 +3,7 @@ variable cluster_name {
 }
 
 variable kubernetes_version {
-  default = "v1.19.2-rancher1-1"
+  default = "v1.19.10-rancher1-1"
 }
 
 variable aws_access_key {
