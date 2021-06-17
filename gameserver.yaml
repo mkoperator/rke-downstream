@@ -1,4 +1,4 @@
-piVersion: agones.dev/v1
+apiVersion: agones.dev/v1
 kind: GameServer
 metadata:
   annotations:
