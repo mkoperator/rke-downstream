@@ -61,6 +61,25 @@ resource "aws_subnet" "land" {
     "kubernetes.io/cluster/${rancher2_cluster.downstream_cluster.id}" = "owned"
   }
 }
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "${var.aws_prefix}-gateway"
+  }
+}
+resource "aws_default_route_table" "main" {
+  default_route_table_id = aws_vpc.main.default_route_table_id
+
+ route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.gw.id
+  }
+
+  tags = {
+    Name = "main"
+  }
+}
 module "rke_infra" {
   source                      = "./modules/rke-infra-aws"
   aws_access_key              = var.aws_access_key
