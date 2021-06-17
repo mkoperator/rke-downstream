@@ -6,14 +6,14 @@ resource "kubernetes_namespace" "cattle_monitoring_system" {
  name = "cattle-monitoring-system"
   }
 }
-resource "kubernetes_namespace" "cattle_dashboards" {
-  metadata {
-    annotations = {
-      "field.cattle.io/projectId" = var.project_system_id
-    }
- name = "cattle-dashboards"
-  }
-}
+#resource "kubernetes_namespace" "cattle_dashboards" {
+#  metadata {
+#    annotations = {
+#      "field.cattle.io/projectId" = var.project_system_id
+#    }
+# name = "cattle-dashboards"
+#  }
+#}
 resource "helm_release" "monitoring_crd" {
   name       = "rancher-monitoring-crd"
   repository = "https://charts.rancher.io"

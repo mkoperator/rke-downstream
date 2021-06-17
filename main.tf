@@ -39,7 +39,6 @@ module "rke_infra" {
   node_all_count              = var.node_all_count
   ssh_pub_file                = var.ssh_pub_file
   ssh_key_file                = var.ssh_key_file
-  deploy_lb                   = true 
 }
 
 module "monitoring" {

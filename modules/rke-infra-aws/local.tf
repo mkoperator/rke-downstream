@@ -23,5 +23,6 @@ locals {
   EOT
   tags = {
     TFModule = var.prefix
+    "kubernetes.io/cluster/${var.clusterid}" = "shared"
   }
 }

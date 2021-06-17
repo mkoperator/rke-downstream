@@ -18,3 +18,7 @@ resource "helm_release" "agones" {
     "${file(var.values_yaml)}"
   ]
 }
+
+resource "kubectl_manifest" "test" {
+    yaml_body = file("gameserver.yaml")
+}

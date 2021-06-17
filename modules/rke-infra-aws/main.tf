@@ -66,8 +66,9 @@ resource "aws_instance" "node_svc_worker" {
   tags = {
     Name                                     = "${var.prefix}-node-svc-worker-${count.index}"
     K8sRoles                                 = "worker"
+    NodeRole                                 = "service"
     TFModule                                 = var.prefix
-    "kubernetes.io/cluster/${var.clusterid}" = "owned"
+    "kubernetes.io/cluster/${var.clusterid}" = "shared"
   }
   lifecycle {
     create_before_destroy = true
@@ -102,6 +103,7 @@ resource "aws_instance" "node_game_worker" {
   tags = {
     Name                                     = "${var.prefix}-node-game-worker-${count.index}"
     K8sRoles                                 = "worker"
+    NodeRole                                 = "game"
     TFModule                                 = var.prefix
     "kubernetes.io/cluster/${var.clusterid}" = "shared"
   }

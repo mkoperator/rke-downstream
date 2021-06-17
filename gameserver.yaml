@@ -1,0 +1,53 @@
+piVersion: agones.dev/v1
+kind: GameServer
+metadata:
+  annotations:
+    agones.dev/ready-container-id: docker://41b9baf2f82b3d3403ce310f39ae5da450c0cbc7e596303b01bfb0495fc82430
+  finalizers:
+  - agones.dev
+  name: mxl-playlist-dynamic
+  namespace: default
+spec:
+  container: mxl-playlist
+  health:
+    failureThreshold: 3
+    initialDelaySeconds: 2300
+    periodSeconds: 5
+  ports:
+  - container: mxl-playlist
+    containerPort: 7777
+    hostPort: 7339
+    name: game
+    portPolicy: Dynamic
+    protocol: UDP
+  - container: mxl-playlist
+    containerPort: 27015
+    hostPort: 7632
+    name: steam_0
+    portPolicy: Dynamic
+    protocol: TCP
+  - container: mxl-playlist
+    containerPort: 27015
+    hostPort: 7796
+    name: steam_1
+    portPolicy: Dynamic
+    protocol: UDP
+  - container: mxl-playlist
+    containerPort: 27016
+    hostPort: 7906
+    name: steam_2
+    portPolicy: Dynamic
+    protocol: UDP
+  scheduling: Packed
+  sdkServer:
+    grpcPort: 9357
+    httpPort: 9358
+    logLevel: Info
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containers:
+      - image: 859071865440.dkr.ecr.us-west-1.amazonaws.com/mxl-playlist-server:1.2
+        name: mxl-playlist
+        resources: {}
