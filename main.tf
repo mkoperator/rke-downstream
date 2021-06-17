@@ -26,8 +26,8 @@ resource "aws_vpc" "main" {
   instance_tenancy = "default"
 
   tags = {
-    Name                                     = "${var.prefix}-vpc"
-    TFModule                                 = var.prefix
+    Name                                     = "${var.aws_prefix}-vpc"
+    TFModule                                 = var.aws_prefix
     "kubernetes.io/cluster/${rancher2_cluster.downstream_cluster.id}" = "owned"
   }
 }
@@ -36,8 +36,8 @@ resource "aws_subnet" "amazonia" {
   cidr_block = "10.0.1.0/24"
 
   tags = {
-    Name                                     = "${var.prefix}-sub-amazonia"
-    TFModule                                 = var.prefix
+    Name                                     = "${var.aws_prefix}-sub-amazonia"
+    TFModule                                 = var.aws_prefix
     "kubernetes.io/cluster/${rancher2_cluster.downstream_cluster.id}" = "owned"
   }
 }
@@ -46,8 +46,8 @@ resource "aws_subnet" "atlantis" {
   cidr_block = "10.0.2.0/24"
 
   tags = {
-    Name                                     = "${var.prefix}-sub-atlantis"
-    TFModule                                 = var.prefix
+    Name                                     = "${var.aws_prefix}-sub-atlantis"
+    TFModule                                 = var.aws_prefix
     "kubernetes.io/cluster/${rancher2_cluster.downstream_cluster.id}" = "owned"
   }
 }
@@ -56,8 +56,8 @@ resource "aws_subnet" "land" {
   cidr_block = "10.0.3.0/24"
 
   tags = {
-    Name                                     = "${var.prefix}-sub-land"
-    TFModule                                 = var.prefix
+    Name                                     = "${var.aws_prefix}-sub-land"
+    TFModule                                 = var.aws_prefix
     "kubernetes.io/cluster/${rancher2_cluster.downstream_cluster.id}" = "owned"
   }
 }

@@ -119,7 +119,7 @@ resource "aws_instance" "node_all" {
   vpc_security_group_ids      = [aws_security_group.master_nodes.id, aws_security_group.svc_nodes.id, aws_security_group.game_nodes.id]
   subnet_id                   = element(tolist(data.aws_subnet_ids.available.ids), 0)
   associate_public_ip_address = true
-  user_data                   = local.node_all_cloudinit
+  user_data                   = "${local.node_all_cloudinit} --node-name ${var.prefix}-node-aio-${count.index}"
   iam_instance_profile        = var.master_iam_instance_profile
   root_block_device {
     volume_type = "gp2"
