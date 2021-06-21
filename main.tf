@@ -8,6 +8,18 @@ resource "rancher2_cluster" "downstream_cluster" {
     cloud_provider {
       name              = "aws"
     }
+    upgrade_strategy {
+      drain                        = true
+      max_unavailable_worker       = "30%"
+      max_unavailable_controlplane = "1"
+      drain_input {
+        delete_local_data = true
+        force = false
+        grace_period = -1
+        ignore_daemon_sets = true
+        timeout = 120
+      }
+    }
     services {
       kube_api {
         secrets_encryption_config {
@@ -114,15 +126,15 @@ module "logging" {
   values_yaml       = "logging_values.yaml"
 }
 
-module "agones" {
-  source            = "./modules/agones"
-  kubeconfig_file   = local_file.kube_config_workload_yaml.filename
-  project_id         = rancher2_cluster_sync.downstream_cluster.default_project_id
-  values_yaml       = "agones_values.yaml"
-}
+#module "agones" {
+#  source            = "./modules/agones"
+#  kubeconfig_file   = local_file.kube_config_workload_yaml.filename
+#  project_id         = rancher2_cluster_sync.downstream_cluster.default_project_id
+#  values_yaml       = "agones_values.yaml"
+#}
 
-module "autoscaler" {
-  source            = "./modules/cluster-autoscaler"
-  kubeconfig_file   = local_file.kube_config_workload_yaml.filename
-  project_system_id = rancher2_cluster_sync.downstream_cluster.system_project_id
-}
+#module "autoscaler" {
+#  source            = "./modules/cluster-autoscaler"
+#  kubeconfig_file   = local_file.kube_config_workload_yaml.filename
+#  project_system_id = rancher2_cluster_sync.downstream_cluster.system_project_id
+#}
