@@ -127,7 +127,7 @@ resource "aws_instance" "node_all" {
   }
   provisioner "remote-exec" {
     inline = [
-      "${local.node_all_cloudinit} --node-name ${var.prefix}-node-aio-${count.index} --address ${self.public_ip} --internal-address ${self.private_ip}; cloud-init status --wait"
+      "cloud-init status --wait"
     ]
 
     connection {
