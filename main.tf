@@ -126,12 +126,12 @@ module "logging" {
   values_yaml       = "logging_values.yaml"
 }
 
-#module "agones" {
-#  source            = "./modules/agones"
-#  kubeconfig_file   = local_file.kube_config_workload_yaml.filename
-#  project_id         = rancher2_cluster_sync.downstream_cluster.default_project_id
-#  values_yaml       = "agones_values.yaml"
-#}
+module "agones" {
+  source            = "./modules/agones"
+  kubeconfig_file   = local_file.kube_config_workload_yaml.filename
+  project_id         = rancher2_cluster_sync.downstream_cluster.default_project_id
+  values_yaml       = "agones_values.yaml"
+}
 
 #module "autoscaler" {
 #  source            = "./modules/cluster-autoscaler"

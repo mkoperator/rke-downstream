@@ -18,7 +18,6 @@ resource "aws_security_group" "master_nodes" {
     cidr_blocks = ["0.0.0.0/0"]
     description = ""
   }
-
   ingress {
     from_port       = 443
     to_port         = 443
@@ -142,7 +141,20 @@ resource "aws_security_group" "game_nodes" {
     cidr_blocks = ["0.0.0.0/0"]
     description = ""
   }
-
+  ingress {
+    from_port       = 7000
+    to_port         = 8000
+    protocol        = "UDP"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = ""
+  }
+  ingress {
+    from_port       = 50000
+    to_port         = 50000
+    protocol        = "UDP"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = ""
+  }
   ingress {
     from_port = 0
     to_port   = 0
