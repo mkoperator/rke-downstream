@@ -33,72 +33,13 @@ resource "rancher2_cluster_sync" "downstream_cluster" {
   cluster_id    = rancher2_cluster.downstream_cluster.id
   state_confirm = 2
 }
-resource "aws_vpc" "main" {
-  cidr_block       = "10.0.0.0/16"
-  instance_tenancy = "default"
 
-  tags = {
-    Name                                     = "${var.aws_prefix}-vpc"
-    TFModule                                 = var.aws_prefix
-    "kubernetes.io/cluster/${rancher2_cluster.downstream_cluster.id}" = "owned"
-  }
-}
-resource "aws_subnet" "amazonia" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.1.0/24"
-
-  tags = {
-    Name                                     = "${var.aws_prefix}-sub-amazonia"
-    TFModule                                 = var.aws_prefix
-    "kubernetes.io/cluster/${rancher2_cluster.downstream_cluster.id}" = "owned"
-  }
-}
-resource "aws_subnet" "atlantis" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.2.0/24"
-
-  tags = {
-    Name                                     = "${var.aws_prefix}-sub-atlantis"
-    TFModule                                 = var.aws_prefix
-    "kubernetes.io/cluster/${rancher2_cluster.downstream_cluster.id}" = "owned"
-  }
-}
-resource "aws_subnet" "land" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.3.0/24"
-
-  tags = {
-    Name                                     = "${var.aws_prefix}-sub-land"
-    TFModule                                 = var.aws_prefix
-    "kubernetes.io/cluster/${rancher2_cluster.downstream_cluster.id}" = "owned"
-  }
-}
-resource "aws_internet_gateway" "gw" {
-  vpc_id = aws_vpc.main.id
-
-  tags = {
-    Name = "${var.aws_prefix}-gateway"
-  }
-}
-resource "aws_default_route_table" "main" {
-  default_route_table_id = aws_vpc.main.default_route_table_id
-
- route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.gw.id
-  }
-
-  tags = {
-    Name = "main"
-  }
-}
 module "rke_infra" {
   source                      = "./modules/rke-infra-aws"
   aws_access_key              = var.aws_access_key
   aws_secret_key              = var.aws_secret_key
   aws_region                  = var.aws_region
   prefix                      = var.aws_prefix
-  aws_vpc                     = aws_vpc.main.id
   master_iam_instance_profile = var.master_iam_instance_profile
   game_iam_instance_profile   = var.game_iam_instance_profile
   svc_iam_instance_profile    = var.svc_iam_instance_profile

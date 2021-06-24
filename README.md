@@ -5,6 +5,12 @@
 $ terraform init
 ```
 
+### Run
+You'll hae to run the apply and then say "yes" to accept the changes. If you are feeling dangerous, do `--auto-approve`
+```shell
+$ terraform apply
+```
+
 ### Configure
 cluster_name                = Name of the cluster in AWS, Rancher
 
@@ -33,3 +39,22 @@ master_iam_instance_profile = IAM role to bestore onto master and aio instances,
 svc_iam_instance_profile    = IAM role to bestore onto service instances, must have permission
 
 game_iam_instance_profile   = IAM role to bestore onto game instances, must have permission
+
+
+## System Components
+
+main.tf - main runner file, instantiates Rancher connection and creates downstream cluster. Directs aws to create infrastructure and then deploys services.
+
+proivder.tf - defines settings to connect with rancher and load aws.
+
+modules - directory of modules
+
+rke-ifra-aws/ - module responsible for AWS provisioning bits.
+
+agones/ - agones module
+
+logging/ - logging module
+
+monitoring/ - monitoring module
+
+cluster-autoscaler/ - not currently included.

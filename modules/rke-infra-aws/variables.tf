@@ -116,9 +116,4 @@ variable "clusterid" {
   type        = string
   description = "Unique ID for this cluster"
   default     = "1d776bf9-8283-4ea8-af3a-f8d30646695e"
-}
-variable "aws_vpc" {
-  type        = string
-  description = "vpc id"
-  default     = ""
-}
+}  
