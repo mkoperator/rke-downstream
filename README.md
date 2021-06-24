@@ -11,7 +11,13 @@ You'll hae to run the apply and then say "yes" to accept the changes. If you are
 $ terraform apply
 ```
 
-### Configure
+### Destroy
+destroy existing infra
+```shell
+$ terraform destroy
+```
+
+### Configuration
 cluster_name                = Name of the cluster in AWS, Rancher
 
 aws_prefix                  = Prefix for resources in AWS
@@ -58,3 +64,8 @@ logging/ - logging module
 monitoring/ - monitoring module
 
 cluster-autoscaler/ - not currently included.
+
+### Requirements
+AWS Keys with enough access to create and bring down ec2 instances with pass through on the instance roles.
+
+terraform 1.0 is best, but .14+ should work.
